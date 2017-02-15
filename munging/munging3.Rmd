@@ -1,0 +1,78 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Imputes most frequent missing locations values
+
+Altogether, ~50,000 records out of ~96,000 records are imputed
+
+Reading data file created using munging1.Rmd (not munging2.Rmd)
+```{r, echo=FALSE}
+library(readr)
+library(magrittr)
+start <- Sys.time()
+police_calls <- read_csv("police_calls.csv")
+Sys.time() - start
+```
+
+Loading unmapped dataset created using munging2.Rmd
+```{r}
+unmapped_locations <- read_csv("unmapped_locations_2017_0213.csv")
+```
+
+Do a little manipulation of the coordinates column to get latitude and longtitude
+```{r}
+unmapped_locations$latitude <- sub(",.*", "", unmapped_locations$coordinates)
+unmapped_locations$latitude <- as.numeric(unmapped_locations$latitude)
+unmapped_locations$longitude <- sub(".* ", "", unmapped_locations$coordinates)
+unmapped_locations$longitude <- as.numeric(unmapped_locations$longitude)
+```
+
+```{r, eval=FALSE, include=FALSE}
+for(this_location in unmapped_locations$Incident_Location[1]) {
+ police_calls[police_calls$Incident_Location == this_location & !is.na(police_calls$Incident_Location),]$latitude = unmapped_locations[unmapped_locations$Incident_Location == this_location,]$latitude
+  #print(unmapped_locations[unmapped_locations$Incident_Location == this_location & !is.na(unmapped_locations$latitude),]$latitude)
+}
+```
+
+```{r, eval=FALSE, include=FALSE}
+sapply(unmapped_locations$Incident_Location[1], FUN = function(this_location) police_calls[police_calls$Incident_Location == this_location & !is.na(police_calls$Incident_Location),]$latitude = unmapped_locations[unmapped_locations$Incident_Location == this_location,]$latitude )
+#sapply(unmapped_locations$Incident_Location[80:90], FUN = function(this_location) )
+```
+
+Do the imputation. This is the part that takes a LONG time due to the size of the files.
+Takes about 1 hour.
+```{r}
+impute_lat <- function(this_location) {
+  # Impute latitude
+  # You have to use GLOBAL assignment: "<<-"!!
+  # http://stackoverflow.com/questions/1236620/global-variables-in-r
+  
+  police_calls[police_calls$Incident_Location == this_location & !is.na(police_calls$Incident_Location),]$latitude <<- unmapped_locations[unmapped_locations$Incident_Location == this_location,]$latitude
+}
+
+impute_long <- function(a_location) {
+  # Impute longitude
+  # You have to use GLOBAL assignment: "<<-"!!
+  # http://stackoverflow.com/questions/1236620/global-variables-in-r
+  
+  # Longitude to be imputed
+  #imputed_long <- unmapped_locations[unmapped_locations$Incident_Location == a_location,]$longitude
+
+  police_calls[police_calls$Incident_Location == a_location & !is.na(police_calls$Incident_Location),]$longitude <<- unmapped_locations[unmapped_locations$Incident_Location == a_location,]$longitude
+}
+
+start <- Sys.time()
+# Suppress the output using invisible()
+# http://stackoverflow.com/questions/2723034/suppress-one-commands-output-in-r
+sapply(unmapped_locations$Incident_Location[1:650], FUN = impute_lat) %>% invisible()
+sapply(unmapped_locations$Incident_Location[1:650], FUN = impute_long) %>% invisible()
+Sys.time() - start
+```
+
+Write dataset with imputed values to file:
+```{r}
+write_csv(as.data.frame(police_calls), "police_calls_2017_0214.csv")
+```
+
