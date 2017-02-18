@@ -67,11 +67,11 @@ Here you can view the results 25 at a time, as well as interactively filter and 
 
 The bar plots (and the density maps) are faceted according to the input selection. In order to keep the tables readable, the top six police calls categories are used.
 
-The following shows a result of crimes on Mondays, Wednesdays, and Fridays that took place during the early morning and evening time periods, faceted by day of the week
+The following shows a result of pollice calls on Mondays, Wednesdays, and Fridays that took place during the early morning and evening time periods, faceted by day of the week
 
 ![alt text](faceted_inputs_1.PNG "Faceted inputs")  ![alt text](faceted_result_1.PNG "Faceted results")    
 <br>
-The same crime set, now faceted by time of day
+The same set of results, now faceted by time of day
 
 ![alt text](faceted_inputs_2.PNG "Faceted inputs")  ![alt text](faceted_result_2.PNG "Faceted results")
 
@@ -124,3 +124,7 @@ The table depicts a 3-way contingency table. The variables (category, day of the
 18. Eduardo Ariño de la Rubia and Sheila Doshi. ***A Huge Debate: R vs. Python for Data Science*** [Video] Retrieved from https://blog.dominodatalab.com/video-huge-debate-r-vs-python-data-science/
 
 19. EliteDataScience. ***R vs Python for Data Science: Summary of Modern Advances*** Retrieved from https://elitedatascience.com/r-vs-python-for-data-science
+
+20. LostLin and Tommy. ***switch() statement usage*** Retrieved from http://stackoverflow.com/questions/7825501/switch-statement-usage
+
+21. kay. ***Embedding Image in Shiny App*** Retrieved from http://stackoverflow.com/questions/21996887/embedding-image-in-shiny-app

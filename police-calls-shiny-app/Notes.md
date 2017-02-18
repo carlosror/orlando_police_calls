@@ -35,11 +35,11 @@ Here you can view the results 25 at a time, as well as interactively filter and 
 
 The bar plots (and the density maps) are faceted according to the input selection. In order to keep the tables readable, the top six police calls categories are used.
 
-The following shows a result of crimes on Mondays, Wednesdays, and Fridays that took place during the early morning and evening time periods, faceted by day of the week
+The following shows a result of police calls on Mondays, Wednesdays, and Fridays that took place during the early morning and evening time periods, faceted by day of the week
 
 ![alt text](faceted_inputs_1.png "Faceted inputs")  ![alt text](faceted_result_1.png "Faceted results")    
 <br>
-The same crime set, now faceted by time of day
+The same results, now faceted by time of day
 
 ![alt text](faceted_inputs_2.png "Faceted inputs")  ![alt text](faceted_result_2.png "Faceted results")
 
@@ -55,7 +55,7 @@ The table depicts a 3-way contingency table. The variables (category, day of the
 
 ### References
 
-1. Orlando Police Department. (2016). ***OPD Calls for Service Data*** [CSV]. Retrieved from https://data.cityoforlando.net/Orlando-Police/OPD-Calls-for-Service-Data-Lens/uum9-29mz).
+1. Orlando Police Department. (2016). ***OPD Calls for Service Data*** [CSV]. Retrieved from https://data.cityoforlando.net/Orlando-Police/OPD-Calls-for-Service-Data-Lens/uum9-29mz
 
 2. Hillsborough County Sheriff's Office. ***Hillsborough County Crime Map***. Retrieved from http://gis.hcso.tampa.fl.us/crimemapping/
 
@@ -92,3 +92,7 @@ The table depicts a 3-way contingency table. The variables (category, day of the
 18. Eduardo Ariño de la Rubia and Sheila Doshi. ***A Huge Debate: R vs. Python for Data Science*** [Video] Retrieved from https://blog.dominodatalab.com/video-huge-debate-r-vs-python-data-science/
 
 19. EliteDataScience. ***R vs Python for Data Science: Summary of Modern Advances*** Retrieved from https://elitedatascience.com/r-vs-python-for-data-science
+
+20. LostLin and Tommy. ***switch() statement usage*** Retrieved from http://stackoverflow.com/questions/7825501/switch-statement-usage
+
+21. kay. ***Embedding Image in Shiny App*** Retrieved from http://stackoverflow.com/questions/21996887/embedding-image-in-shiny-app

@@ -16,7 +16,9 @@ plots_facets_vector <- c("day of week" , "time of day" , "crime category" )
 years_vector <- c("2015", "2014", "2013", "2012", "2011", "2010", "2009")
 locations_vector <- c("Anderson St and Division Ave, Orlando", "Fashion Square Mall, Orlando", "Millenia Mall, Orlando", "John Young Pkwy and Princeton St, Orlando",
                       "Lake Eola Park, Orlando", "International Dr and Kirkman Rd, Orlando", "Semoran and Hoffner, Orlando", "Narcoossee Rd and Lee Vista Blvd, Orlando",
-                      "Mills and Colonial, Orlando", "Baldwin Park, Orlando", "S Conway Rd and Curry Ford Rd, Orlando", "Michigan St and Orange Ave, Orlando")
+                      "Mills and Colonial, Orlando", "Baldwin Park, Orlando", "S Conway Rd and Curry Ford Rd, Orlando", "Michigan St and Orange Ave, Orlando",
+                      "Magnolia and Colonial, Orlando", "Lake Orlando, Orlando", "Lake Lawne, Orlando", "Gaston Edwards Park, Orlando", "Lake Rowena, Orlando",
+                      "Curry Ford and Semoran, Orlando", "Lake Concord, Orlando", "Americana and Conroy, Orlando", "Millennia Park, Orlando", "Lake Pineloch, Orlando")
 
 shinyUI(fluidPage(
   titlePanel(h3("Orlando Police Calls Map"), windowTitle = "Orlando Police Calls Map"),
@@ -33,7 +35,6 @@ shinyUI(fluidPage(
            checkboxGroupInput("days_of_week", label = h4("Days of Week"), choices = days_vector, selected = days_checked, inline = TRUE),
            checkboxGroupInput("time_periods", label = h4("Time Periods"), choices = periods_vector, selected = periods_checked, inline = TRUE),
            selectInput("plots_facets", label = h4("Facet density maps and bar plots by"), plots_facets_vector),
-           #HTML('<b style="color: #337ab7;"><a href="https://github.com/carlosror/orlando_police_calls" target="_blank">Github project page</a></b>')
            HTML('<a href="https://github.com/carlosror/orlando_police_calls" target="_blank"><img src = "github_icon.png" alt = "xyz"></a>
                  <a href="https://twitter.com/LrnDataScience" target="_blank"><img src = "twitter_icon.png" alt = "xyz"></a>')
     ),
