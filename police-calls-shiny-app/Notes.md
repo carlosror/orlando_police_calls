@@ -88,3 +88,7 @@ The table depicts a 3-way contingency table. The variables (category, day of the
 16. Tor and Shane. ***Suppress one command's output in R*** Retrieved from http://stackoverflow.com/questions/2723034/suppress-one-commands-output-in-r
 
 17. Alphaneo and Dirk Eddelbuettel. ***Global variables in R*** Retrieved from http://stackoverflow.com/questions/1236620/global-variables-in-r
+
+18. Eduardo Ariño de la Rubia and Sheila Doshi. ***A Huge Debate: R vs. Python for Data Science*** [Video] Retrieved from https://blog.dominodatalab.com/video-huge-debate-r-vs-python-data-science/
+
+19. EliteDataScience. ***R vs Python for Data Science: Summary of Modern Advances*** Retrieved from https://elitedatascience.com/r-vs-python-for-data-science

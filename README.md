@@ -1,5 +1,5 @@
 ###URL
-
+https://carlosgg.shinyapps.io/orlando-police-calls-map/
 
 ###Data source
 
@@ -15,12 +15,12 @@ You can also [facet](http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/) the plo
 
 The map tab displays all the police calls according to the options selected on the left panel.
 
-![](Map.png "Map")
+![](Map.PNG "Map")
 <br><br>
 
 Zooming in and clicking on an individual marker will show the address, description, and date and time of the incident.
 
-![](crime_marker.png "Police service call marker")
+![](crime_marker.PNG "Police service call marker")
 <br><br>
 
 ### Data tab
@@ -33,17 +33,17 @@ The bar plots (and the density maps) are faceted according to the input selectio
 
 The following shows a result of crimes on Mondays, Wednesdays, and Fridays that took place during the early morning and evening time periods, faceted by day of the week
 
-![alt text](faceted_inputs_1.png "Faceted inputs")  ![alt text](faceted_result_1.png "Faceted results")    
+![alt text](faceted_inputs_1.PNG "Faceted inputs")  ![alt text](faceted_result_1.PNG "Faceted results")    
 <br>
 The same crime set, now faceted by time of day
 
-![alt text](faceted_inputs_2.png "Faceted inputs")  ![alt text](faceted_result_2.png "Faceted results")
+![alt text](faceted_inputs_2.PNG "Faceted inputs")  ![alt text](faceted_result_2.PNG "Faceted results")
 
 ### Density maps tab
 
 The density maps take a few seconds to display. They are faceted similarly to the bar plots
 
-![](faceted_result_3.png "Faceted map density")
+![](faceted_result_3.PNG "Faceted map density")
 
 ### Table tab
 
@@ -84,3 +84,7 @@ The table depicts a 3-way contingency table. The variables (category, day of the
 16. Tor and Shane. ***Suppress one command's output in R*** Retrieved from http://stackoverflow.com/questions/2723034/suppress-one-commands-output-in-r
 
 17. Alphaneo and Dirk Eddelbuettel. ***Global variables in R*** Retrieved from http://stackoverflow.com/questions/1236620/global-variables-in-r
+
+18. Eduardo Ariño de la Rubia and Sheila Doshi. ***A Huge Debate: R vs. Python for Data Science*** [Video] Retrieved from https://blog.dominodatalab.com/video-huge-debate-r-vs-python-data-science/
+
+19. EliteDataScience. ***R vs Python for Data Science: Summary of Modern Advances*** Retrieved from https://elitedatascience.com/r-vs-python-for-data-science

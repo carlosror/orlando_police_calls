@@ -34,8 +34,8 @@ shinyUI(fluidPage(
            checkboxGroupInput("time_periods", label = h4("Time Periods"), choices = periods_vector, selected = periods_checked, inline = TRUE),
            selectInput("plots_facets", label = h4("Facet density maps and bar plots by"), plots_facets_vector),
            #HTML('<b style="color: #337ab7;"><a href="https://github.com/carlosror/orlando_police_calls" target="_blank">Github project page</a></b>')
-           HTML('<a href="https://github.com/carlosror/orlando_police_calls" target="_blank"><img src = "github_icon.png" alt = "xyz"></a>')
-           #img(src = 'github_icon_1.png')
+           HTML('<a href="https://github.com/carlosror/orlando_police_calls" target="_blank"><img src = "github_icon.png" alt = "xyz"></a>
+                 <a href="https://twitter.com/LrnDataScience" target="_blank"><img src = "twitter_icon.png" alt = "xyz"></a>')
     ),
     mainPanel(
         tabsetPanel(
