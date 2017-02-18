@@ -229,12 +229,15 @@ shinyServer(function(input, output, session) {
         location_map <- get_map(location = isolate(input$address), source= "google", zoom = zoom_value + 1, color = "color") %>% ggmap(extent = "panel")
         location_map <- location_map + stat_density2d(aes(x = longitude, y = latitude, fill = ..level.., alpha = ..level..), bins = 20, geom = "polygon", data = relevant_data) + scale_fill_gradient(low = "yellow", high = "red") 
         location_map <- isolate(if (input$plots_facets[1] == "crime category") location_map + facet_wrap(~ categories) else if (input$plots_facets[1] == "day of week") location_map + facet_wrap(~ days) else location_map + facet_wrap(~ periods))
-        location_map <- location_map + theme(plot.title = element_text(size = 22, face = "bold"), strip.text.x = element_text(size = 16), legend.position = "none", axis.text.x = element_blank(), axis.title.x = element_blank(), axis.ticks.x = element_blank(),  axis.text.y = element_blank(), axis.title.y = element_blank(), axis.ticks.y = element_blank())
+        location_map <- location_map + theme(plot.title = element_text(size = 24, face = "bold"), strip.text.x = element_text(size = 16), legend.position = "none", axis.text.x = element_blank(), axis.title.x = element_blank(), axis.ticks.x = element_blank(),  axis.text.y = element_blank(), axis.title.y = element_blank(), axis.ticks.y = element_blank())
         location_map + ggtitle(paste(isolate(input$year), "police calls density maps of", isolate(input$address)))
     })
     
-    # Notes
-    output$notes <- renderUI({includeHTML("Notes.html")})
+    # References
+    output$references <- renderUI({includeHTML("References.html")})
+    
+    # Instructions
+    output$instructions <- renderUI({includeHTML("Instructions.html")})
     
     output$debug <- renderPrint({
         ###########################################################################
