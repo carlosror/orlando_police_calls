@@ -139,10 +139,10 @@ shinyServer(function(input, output, session) {
         relevant_data <- filter_data()
         
         # Use some of the columns as markers for the leaflet() function
-        relevant_data_markers <- relevant_data[c("Incident_Date_Time", "longitude", "latitude", "Incident_Type", "Incident_Location", "categories")]
+        relevant_data_markers <- relevant_data[c("Incident_Date_Time", "longitude", "latitude", "Incident_Type", "Incident_Location")]
         zoom_value <- isolate(if (input$radius == 0.5) 15 else if (input$radius <= 1.5) 14 else 13) # set map zoom based on user-selected radius
         # Generate map
-        leaflet(data = relevant_data_markers) %>% addTiles() %>% addMarkers(~longitude, ~latitude, popup=~paste("<b style='color:DarkRed;'>Location:</b>", Incident_Location, "<b style='color:DarkRed;'>Category:</b>", categories, "<b style='color:DarkRed;'>Description:</b>", Incident_Type, "<b style='color:DarkRed;'>Date & Time:</b>", Incident_Date_Time, sep = "<br/>"), clusterOptions = markerClusterOptions()) %>% setView(location[1], location[2], zoom=zoom_value) %>% addCircles(lng = location[1], lat =location[2], radius = isolate(input$radius) * 1609.34)
+        leaflet(data = relevant_data_markers) %>% addTiles() %>% addMarkers(~longitude, ~latitude, popup=~paste("<b style='color:DarkRed;'>Location:</b>", Incident_Location, "<b style='color:DarkRed;'>Event:</b>", Incident_Type, "<b style='color:DarkRed;'>Date & Time:</b>", Incident_Date_Time, sep = "<br/>"), clusterOptions = markerClusterOptions()) %>% setView(location[1], location[2], zoom=zoom_value) %>% addCircles(lng = location[1], lat =location[2], radius = isolate(input$radius) * 1609.34)
     })
     
     output$DataTable <- renderDataTable({
