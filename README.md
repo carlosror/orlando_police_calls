@@ -1,4 +1,4 @@
-###URL
+### URL
 https://carlosgg.shinyapps.io/orlando-police-calls-map/
 
 ### Motivation
@@ -11,7 +11,7 @@ Here I had access to the police calls data rather than the actual criminal activ
 
 [R](https://leanpub.com/rprogramming), [R Studio](https://www.rstudio.com/), [Shiny R server](http://shiny.rstudio.com/articles/), [Leaflet for R](http://rstudio.github.io/leaflet/), [ggmap](https://journal.r-project.org/archive/2013-1/kahle-wickham.pdf).
 
-###Data source
+### Data source
 
 The police service calls data was obtained from the [City of Orlando Open Data website](https://data.cityoforlando.net/Orlando-Police/OPD-Calls-for-Service-Data-Lens/uum9-29mz)
 
