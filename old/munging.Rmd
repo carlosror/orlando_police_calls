@@ -1,0 +1,140 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r, eval=FALSE, include=FALSE}
+start <- Sys.time()
+police_calls <- read.csv("Calls_For_Service_2009_-_2015.csv")
+Sys.time() - start
+```
+
+Read the data. about 474 MB:
+```{r, include=FALSE}
+library(readr)
+start2 <- Sys.time()
+police_calls <- read_csv("Calls_For_Service_2009_-_2015.csv")
+Sys.time() - start2
+```
+
+Some libraries we will be using:
+```{r, include=FALSE}
+library(chron) # for dealing with chronological objects
+library(magrittr) # pipe operator
+library(plyr) # rename
+```
+
+Rename columns to remove spaces:
+```{r}
+police_calls <- rename(police_calls, replace = c("Incident Number" = "Incident_Number"))
+police_calls <- rename(police_calls, replace = c("Incident Date Time" = "Incident_Date_Time"))
+police_calls <- rename(police_calls, replace = c("Incident Location" = "Incident_Location"))
+police_calls <- rename(police_calls, replace = c("Incident Type" = "Incident_Type"))
+police_calls <- rename(police_calls, replace = c("Incident Disposition Class" = "Incident_Disposition_Class"))
+police_calls <- rename(police_calls, replace = c("Incident Disposition" = "Incident_Disposition"))
+```
+
+Deal with the dates and times:
+
+```{r}
+start <- Sys.time()
+#Get the dates of incidents
+police_calls_dates <- substr(police_calls$Incident_Date_Time, 1, 10) %>% dates() %>% as.Date("%m/%d/%y")
+#Create new column consisting of days of week incidents took place
+police_calls$days <- weekdays(police_calls_dates) # vector of "Wednesday" , "Saturday", ...
+
+#Get the times, in 24-hour format, the incidents took place
+#Using strptime() per this S.O. post:
+#http://stackoverflow.com/questions/29833538/convert-12-hour-character-time-to-24-hour
+police_calls_times <- substr(police_calls$Incident_Date_Time, 12,22) %>% strptime("%I:%M:%S %p") %>% format(format = "%H:%M:%S") %>% times()
+#Create new column consisting of hour of day incidents took place
+police_calls_hours <- hours(police_calls_times)
+
+#Create a new column consisting of time period incidnts took place
+# Determine periods as follows:
+# Early Morning (before 6 AM): 0, Morning (between 6 AM and 12 PM): 1
+# Afternoon (between noon and 6 PM): 2, Evening (between 6 PM and midnight): 3
+hours_to_periods <- function(hour) {if (hour %/% 6 == 0) "early_morning" else if (hour %/% 6 == 1) "morning" else if (hour %/% 6 == 2) "afternoon" else "evening"}
+police_calls$periods <- sapply(police_calls_hours, hours_to_periods)
+Sys.time() - start
+```
+
+```{r}
+num_types <- length(unique(police_calls$Incident_Type))
+types <- rep("placeholder", num_types) #creates vector of "placeholder" repeated num_types times
+names(types) <- as.vector(unique(police_calls$Incident_Type)) # adds names to vector just created
+names(types)
+```
+
+```{r}
+types[c(1:2, 7, 9, 13, 17:18, 20:21, 23, 35, 40, 42, 49:51, 54:57, 59:60, 62:63, 66:68, 70, 78:82, 84:85, 87:90, 94, 96, 99, 105, 107, 109:110, 115:116, 120:121, 123:124, 127:128, 130, 133, 137, 140, 142)] = "other"
+types[c(3, 5, 30, 101, 105, 117:118, 122, 125)] = "suspicious"
+types[c(4, 22, 41)] = "disturbance"
+types[c(6, 11, 15, 64, 83, 100, 111)] = "alarm"
+types[c(8, 24, 48, 91, 113)] = "battery"
+types[c(10, 103, 112, 138)] = "trespass"
+types[c(12, 20, 25:27, 32, 34, 36:37, 44, 53, 71, 75, 86, 92, 95, 97, 102, 108, 119, 132, 134:135, 141)] = "traffic"
+types[c(14, 93)] = "assault"
+types[c(16)] = "DUI"
+types[c(19, 29, 43, 46)] = "B&E"
+types[c(28)] = "mischief"
+types[c(31, 76, 114, 126)] = "robbery"
+types[c(33, 52, 58, 61, 72:73, 104)] = "theft"
+types[c(38, 45, 69, 139)] = "fugitive"
+types[c(39, 129)] = "drugs"
+types[c(47 )] = "fraud"
+types[c(63, 65, 77, 90, 98, 131)] = "sex crimes"
+types[c(74, 106)] = "suicide"
+types[c(136)] = "murder"
+#types
+```
+
+```{r, eval=FALSE, include=FALSE}
+for (xyz in unique(police_calls$Incident_Type)) {cat(xyz, ": ", rep("\t", 2), types[xyz], " \n")}
+```
+
+Add the categories column to the police_calls dataframe:
+```{r}
+police_calls$categories <- types[police_calls$Incident_Type] 
+```
+
+Extract latitude and longitude and put them in separate columns.
+```{r, include=FALSE}
+#Using the sub() function with regular expressions
+#http://stackoverflow.com/questions/17215789/extract-a-substring-in-r-according-to-a-pattern
+#http://www.endmemo.com/program/R/sub.php
+police_calls$latitude <- sub("[(]", "", police_calls$Location)
+police_calls$latitude <- sub(",.*", "", police_calls$latitude)
+police_calls$latitude <- as.numeric(police_calls$latitude)
+police_calls$longitude <- sub(".* ", "", police_calls$Location)
+police_calls$longitude <- sub(")", "", police_calls$longitude)
+police_calls$longitude <- as.numeric(police_calls$longitude)
+police_calls$Location <- NULL#Removes the (lat, long) column since we are keeping them in separate columns
+```
+
+Null columns we no longer need:
+```{r}
+#police_calls$Incident_Location <- NULL
+police_calls$Status <- NULL
+```
+
+Write to file:
+```{r}
+write_csv(police_calls, "police_calls.csv")
+```
+
+
+```{r, eval=FALSE, include=FALSE}
+police_calls2_unmapped <- police_calls2[is.na(police_calls2$Location),]
+police_calls2_mapped <- police_calls2[!is.na(police_calls2$Location),]
+```
+
+```{r, eval=FALSE, include=FALSE}
+loc2 <- vapply(police_calls2_unmapped$`Incident Location`, FUN = function(z) if (z %in% police_calls2_mapped$`Incident Location`) unique(police_calls2_mapped[police_calls2_mapped$`Incident Location` == z,]["Location"]) else z, FUN.VALUE = 1 )
+```
+
+```{r, eval=FALSE, include=FALSE}
+location_names <- names(sort(table((police_calls2[is.na(police_calls2$Location),]["Incident Location"])), decreasing = TRUE)[1:10])
+```
+

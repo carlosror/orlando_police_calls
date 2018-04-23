@@ -1,0 +1,26 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Generates .csv file of unmapped locations
+
+Read file:
+```{r, include=FALSE}
+library(readr)
+start2 <- Sys.time()
+police_calls <- read_csv("police_calls.csv")
+Sys.time() - start2
+```
+
+
+```{r}
+library(magrittr) # pipe operator
+#location_names <- names(sort(table((police_calls2[is.na(police_calls2$latitude),]["Incident_Location"])), decreasing = TRUE)[1:10])
+location_names <- police_calls[is.na(police_calls$latitude),]["Incident_Location"] %>% table() %>% sort(decreasing = T) %>% names()
+```
+
+```{r}
+write_csv(as.data.frame(location_names), "unmapped_locations.csv")
+```
+
