@@ -1,7 +1,9 @@
 name: orlando-police-calls-map
+title:
 account: carlosgg
 server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
 appId: 157693
-bundleId: 1333855
+bundleId: 2418359
 url: https://carlosgg.shinyapps.io/orlando-police-calls-map/
-when: 1524502949.50409
+when: 1568668604.82277

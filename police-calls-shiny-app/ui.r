@@ -14,7 +14,7 @@ periods_vector <- c("MIDNIGHT - 6:00 A.M." = "early_morning", "6:00 A.M. - NOON"
 periods_checked <- c("early_morning", "morning", "afternoon", "evening")
 plots_facets_vector <- c("day of week" , "time of day" , "crime category" )
 years_vector <- c("2015", "2014", "2013", "2012", "2011", "2010", "2009")
-locations_vector <- c("Anderson St and Division Ave, Orlando", "Fashion Square Mall, Orlando", "Millenia Mall, Orlando", "John Young Pkwy and Princeton St, Orlando",
+locations_vector <- c("Anderson St and Division Ave, Orlando", "Fashion Square, Orlando", "Millenia Mall, Orlando", "John Young Pkwy and Princeton St, Orlando",
                       "Lake Eola Park, Orlando", "International Dr and Kirkman Rd, Orlando", "Semoran and Hoffner, Orlando", "Narcoossee Rd and Lee Vista Blvd, Orlando",
                       "Mills and Colonial, Orlando", "Baldwin Park, Orlando", "S Conway Rd and Curry Ford Rd, Orlando", "Michigan St and Orange Ave, Orlando",
                       "Magnolia and Colonial, Orlando", "Lake Orlando, Orlando", "Lake Lawne, Orlando", "Gaston Edwards Park, Orlando", "Lake Rowena, Orlando",
